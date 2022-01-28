@@ -1,3 +1,13 @@
+// solo hacer el ejercicio
+// y despues en terminal
+// node Repo.... 
+// node Repaso-M1.js
+// Neri Heredia
+// Rei Orozco
+// para que te ejecute los console.log
+
+// https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Object
+
 const { Queue, Node, LinkedList, BinarySearchTree } = require("./DS.js");
 
 // Implementar la función countArray: a partir de un array en el cual cada posición puede ser un único
@@ -9,11 +19,20 @@ const { Queue, Node, LinkedList, BinarySearchTree } = require("./DS.js");
 // Pista: utilizar el método Array.isArray() para determinar si algun elemento de array es un array anidado
 // [Para más información del método: https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Array/isArray]
 
-var countArray = function (array, total = 0) {
+var countArray = function (array) {
     // Tu código aca:
-
-
-};
+    var suma= 0;
+    for(var i =0;i<array.length;i++){
+        if(!Array.isArray(array[i])){
+            suma=suma+array[i];
+            console.log(suma);
+        } else{
+            suma = suma + contar(array[i]);
+        }
+    }
+    console.log(suma);
+    return suma;
+}  
 
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -22,7 +41,7 @@ var countArray = function (array, total = 0) {
 // u objetos anidados
 // Ejemplo:
 // var obj = {
-//   a: {
+//   a: { <-----
 //     a1: 10,
 //     a2: "Franco",
 //     a3: { f: "r", a: "n", c: { o: true } },
@@ -40,7 +59,14 @@ var countArray = function (array, total = 0) {
 
 var countProps = function (obj) {
     // Tu código aca:
-
+    var total = 0;
+    for(var property in obj){
+        total++;
+        if(typeof obj[property] === 'object' && !Array.isArray(obj[property])){
+            total = total + countProps(obj[property]);
+        }
+    }
+    return total;
 };
 
 // --------------------------------------------------------------------------------------------------------------------
